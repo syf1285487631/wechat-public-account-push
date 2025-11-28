@@ -968,12 +968,14 @@ const dataAggregationService = {
       if (user.tianApi && user.tianApi.morning) {
         const morningGreeting = await tianApiService.getMorningGreeting(user.tianApi)
         if (!morningGreeting.error) {
-            data.remark = { 
-              value: `今日心语：${morningGreeting.content}`,
-              color: "#666"  // 可选设置颜色
-            };
-            // 原来的字段可以清空或放简短提示
-            data.morning_greeting = { value: "💖" };
+        // 直接使用完整内容，不进行任何截断
+        data.morning_greeting = { value: morningGreeting.content };
+        
+        // 如果需要，可以同时在remark字段也显示完整内容
+        data.remark = { 
+            value: `💖 ${morningGreeting.content}`,
+            color: "#666"
+        };
         }
       }
 
