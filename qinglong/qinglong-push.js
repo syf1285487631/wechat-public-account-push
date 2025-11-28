@@ -970,7 +970,7 @@ const dataAggregationService = {
         if (!morningGreeting.error) {
         // 直接使用完整内容，不进行任何截断
         data.morning_greeting = { value: morningGreeting.content };
-        
+        logInfo('推送服务初始化开始：{}',morningGreeting.content)
         // 如果需要，可以同时在remark字段也显示完整内容
         data.remark = { 
             value: `💖 ${morningGreeting.content}`,
