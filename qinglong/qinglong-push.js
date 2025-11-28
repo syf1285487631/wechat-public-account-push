@@ -969,6 +969,7 @@ const dataAggregationService = {
         const morningGreeting = await tianApiService.getMorningGreeting(user.tianApi)
         if (!morningGreeting.error) {
           const content = morningGreeting.content;
+          logInfo('推送服务初始化开始{}',content)
                   // 如果内容很长，拆分到多个字段
         if (content.length > 20) {
             // 拆分内容到多个部分
