@@ -975,13 +975,14 @@ const dataAggregationService = {
             // 拆分内容到多个部分
             const part1 = content.substring(0, 15);
             const part2 = content.substring(15, 30);
-            const part3 = content.substring(30);
-            
+            const part3 = content.substring(30,45);
+            const part4 = content.substring(45,60);
+            const part5 = content.substring(60);
             data.morning_greeting = { value: part1 };
-            data.morning_greeting_1 = { value: part2 || "" };  // 借用note_en字段
-            data.morning_greeting_2 = { value: part3 || "" };  // 借用note_ch字段
-            data.note_en = { value: part2 || "" };  // 借用note_en字段
-            data.note_ch = { value: part3 || "" };  // 借用note_ch字段
+            data.morning_greeting_1 = { value: part2 || "" };
+            data.morning_greeting_2 = { value: part3 || "" };
+            data.morning_greeting_3 = { value: part4 || "" };
+            data.morning_greeting_4 = { value: part5 || "" };
         } else {
             // 内容不长，正常显示
             data.morning_greeting = { value: content };
