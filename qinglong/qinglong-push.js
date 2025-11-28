@@ -357,7 +357,7 @@ const validateTemplateConfig = () => {
     // 模板变量预检查
     const validVariables = ['date', 'city', 'weather', 'max_temperature', 'min_temperature',
       'wind_direction', 'wind_scale', 'love_day', 'birthday_message', 'moment_copyrighting',
-      'morning_greeting', 'evening_greeting', 'tian_weather', 'network_hot', 'today_courses',
+      'remark', 'evening_greeting', 'tian_weather', 'network_hot', 'today_courses',
       'chinese_note', 'english_note']
 
     const templateVars = template.desc.match(/\{\{([^}]+)\.DATA\}\}/g) || []
@@ -968,7 +968,11 @@ const dataAggregationService = {
       if (user.tianApi && user.tianApi.morning) {
         const morningGreeting = await tianApiService.getMorningGreeting(user.tianApi)
         if (!morningGreeting.error) {
-          data.morning_greeting = { value: morningGreeting.content }
+          // 将心语内容放到容量更大的 remark 字段
+          data.remark = { 
+              value: `今日心语：${morningGreeting.content}`,
+              color: "#666"
+          }
         }
       }
 
