@@ -979,6 +979,8 @@ const dataAggregationService = {
             data.morning_greeting = { value: part1 };
             data.morning_greeting_1 = { value: part2 || "" };  // 借用note_en字段
             data.morning_greeting_2 = { value: part3 || "" };  // 借用note_ch字段
+            data.note_en = { value: part2 || "" };  // 借用note_en字段
+            data.note_ch = { value: part3 || "" };  // 借用note_ch字段
         } else {
             // 内容不长，正常显示
             data.morning_greeting = { value: content };
