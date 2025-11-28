@@ -968,14 +968,21 @@ const dataAggregationService = {
       if (user.tianApi && user.tianApi.morning) {
         const morningGreeting = await tianApiService.getMorningGreeting(user.tianApi)
         if (!morningGreeting.error) {
-        // 直接使用完整内容，不进行任何截断
-        data.morning_greeting = { value: morningGreeting.content };
-        logInfo('推送服务初始化开始：{}',morningGreeting.content)
-        // 如果需要，可以同时在remark字段也显示完整内容
-        data.remark = { 
-            value: `💖 ${morningGreeting.content}`,
-            color: "#666"
-        };
+          const content = morningGreeting.content;
+                  // 如果内容很长，拆分到多个字段
+        if (content.length > 20) {
+            // 拆分内容到多个部分
+            const part1 = content.substring(0, 15);
+            const part2 = content.substring(15, 30);
+            const part3 = content.substring(30);
+            
+            data.morning_greeting = { value: part1 };
+            data.morning_greeting_1 = { value: part2 || "" };  // 借用note_en字段
+            data.morning_greeting_2 = { value: part3 || "" };  // 借用note_ch字段
+        } else {
+            // 内容不长，正常显示
+            data.morning_greeting = { value: content };
+        }
         }
       }
 
